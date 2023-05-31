@@ -14,7 +14,7 @@
     "sass": "^1.62.1"
   },
   "overrides": {
-    "vue": "latest"
+    "vue": "^3.3.4"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.10",

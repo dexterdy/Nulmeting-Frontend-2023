@@ -1,15 +1,23 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
 
-export const useGlobalStore = defineStore("globalStore", () => {
-  const loading = ref(false);
+class TodoItem {
 
-  const startLoader = (): void => {
-    loading.value = true;
-  }
-  const stopLoader = (): void => {
-    loading.value = false;
-  }
+}
 
-  return { loading, startLoader, stopLoader };
+export const useGlobalStore = defineStore({
+    id: 'global',
+
+    state: () => ({
+        loading: false,
+        todoItems: (new Map<string, TodoItem>),
+    }),
+
+    actions: {
+        startLoader() {
+            this.loading = true;
+          },
+          stopLoader() {
+            this.loading = false;
+          },
+    }
 });
