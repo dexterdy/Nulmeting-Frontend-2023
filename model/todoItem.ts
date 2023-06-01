@@ -11,3 +11,5 @@ class TodoItem {
         this.description = description;
     }
 }
+
+export { TodoItem };

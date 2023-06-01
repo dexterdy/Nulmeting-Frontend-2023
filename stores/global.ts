@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { TodoItem } from "~/model/todoItem";
 
 export const useGlobalStore = defineStore({
     id: 'global',

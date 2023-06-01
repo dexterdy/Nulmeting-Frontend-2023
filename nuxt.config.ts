@@ -11,7 +11,7 @@ export default defineNuxtConfig({
     "nuxt-icons"
   ],
   imports: {
-    dirs: ["stores"],
+    dirs: ["stores", "model"],
   },
   vite: {
     css: {

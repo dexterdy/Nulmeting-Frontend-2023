@@ -12,10 +12,7 @@
                     <tr v-for="todoItem in useGlobalStore().todoItems">
                         <td>{{ todoItem[1].assignee }}</td>
                         <td>{{ todoItem[1].description }}</td>
-                        <td>{{ todoItem[1].dueDateTime.toLocaleString('nl-NL', {
-                            weekday: 'long', year: 'numeric', month:
-                                'long', day: 'numeric', hour: 'numeric', minute: '2-digit', second: '2-digit'
-                        }) }}</td>
+                        <td>{{ formatNL(todoItem[1].dueDateTime) }}</td>
                     </tr>
                 </table>
             </div>
@@ -24,13 +21,6 @@
 </template>
 
 <script setup lang="ts">
-class TodoResponse {
-    todo: TodoItem;
-
-    constructor(todo: TodoItem) {
-        this.todo = todo;
-    }
-}
 function getTodo() {
     const myRequest = new Request("https://86a4h9y007.execute-api.eu-west-1.amazonaws.com/development/nulmeting/todo",
         {
@@ -41,9 +31,12 @@ function getTodo() {
 
     fetch(myRequest)
         .then((response) => response.json())
-        .then((data) => useGlobalStore().todoItems.set(data.todo.id, data.todo))
+        .then((data) => useGlobalStore().todoItems.set(data.todo.id, new TodoItem(data.todo.id, data.todo.assignee, new Date(data.todo.dueDateTime), data.todo.description)))
         .catch(console.error);
+}
 
+function formatNL(dueDateTime: Date): string {
+    return dueDateTime.toLocaleString('nl-NL', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit', second: '2-digit' })
 }
 </script>
 
