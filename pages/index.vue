@@ -28,7 +28,8 @@ function getTodo() {
                 'x-api-key': useGlobalStore().api_key
             }
         });
-
+    
+    // Preventing copies is handled by the Map
     fetch(myRequest)
         .then((response) => response.json())
         .then((data) => useGlobalStore().todoItems.set(data.todo.id, new TodoItem(data.todo.id, data.todo.assignee, new Date(data.todo.dueDateTime), data.todo.description)))
